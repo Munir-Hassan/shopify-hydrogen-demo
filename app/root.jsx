@@ -8,6 +8,7 @@ import {
 } from '@remix-run/react';
 import appStyles from './styles/app.css';
 import favicon from '../public/favicon.svg';
+import {Layout} from './components/Layout';
 
 export const links = () => {
   return [
@@ -31,9 +32,7 @@ export async function loader({context}) {
 
 export default function App() {
   const data = useLoaderData();
-
   const {name} = data.layout.shop;
-
   return (
     <html lang="en">
       <head>
@@ -43,11 +42,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>Hello, {name}</h1>
-        <p>This is a custom storefront powered by Hydrogen</p>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
+        <Layout title={name}>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+        </Layout>
       </body>
     </html>
   );
